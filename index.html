@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comms Resource Center — Mantra4Change</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1F2721;
+    --paper: #E7E4D8;
+    --paper-card: #FAF8F1;
+    --teal: #2F5148;
+    --brass: #8A6023;
+    --rust: #8C4A2F;
+    --slate: #4B5A66;
+    --line: rgba(31, 39, 33, 0.15);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    line-height: 1.5;
+  }
+
+  .masthead {
+    background: var(--ink);
+    color: var(--paper-card);
+    padding: 56px 24px 40px;
+    text-align: center;
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 12px;
+    opacity: 0.7;
+    margin: 0 0 12px;
+  }
+
+  .masthead h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(32px, 5vw, 52px);
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .tagline {
+    max-width: 480px;
+    margin: 0 auto 28px;
+    opacity: 0.85;
+    font-size: 15px;
+  }
+
+  .search-slip {
+    max-width: 420px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .search-label {
+    display: block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 6px;
+  }
+
+  #search {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-size: 15px;
+    border: none;
+    border-bottom: 2px solid var(--brass);
+    background: rgba(250, 248, 241, 0.08);
+    color: var(--paper-card);
+    border-radius: 3px 3px 0 0;
+  }
+
+  #search::placeholder { color: rgba(250, 248, 241, 0.45); }
+
+  #search:focus-visible {
+    outline: 2px solid var(--brass);
+    outline-offset: 2px;
+  }
+
+  main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  .shelf { margin-bottom: 48px; }
+  .shelf.hidden { display: none; }
+
+  .shelf-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--accent, var(--ink));
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+  }
+
+  .shelf-header h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 22px;
+    margin: 0;
+  }
+
+  .shelf-header .org {
+    font-weight: 400;
+    opacity: 0.65;
+    font-size: 0.85em;
+  }
+
+  .shelf-header .count {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    opacity: 0.55;
+  }
+
+  .shelf--internal-mantra { --accent: var(--teal); }
+  .shelf--external-mantra { --accent: var(--brass); }
+  .shelf--external-shikshagraha { --accent: var(--rust); }
+  .shelf--other { --accent: var(--slate); }
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .card {
+    position: relative;
+    background: var(--paper-card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 20px 18px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .card.hidden { display: none; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(31, 39, 33, 0.1);
+    }
+  }
+
+  .stamp {
+    align-self: flex-start;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent, var(--ink));
+    border: 1.5px solid var(--accent, var(--ink));
+    border-radius: 3px;
+    padding: 3px 8px;
+    transform: rotate(-3deg);
+  }
+
+  .card-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: 17px;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  .card-link {
+    margin-top: auto;
+    color: var(--ink);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    text-decoration: none;
+    border-bottom: 1.5px solid var(--accent, var(--ink));
+    align-self: flex-start;
+    padding-bottom: 1px;
+  }
+
+  .card-link:hover,
+  .card-link:focus-visible { opacity: 0.7; }
+
+  .no-results {
+    display: none;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    opacity: 0.6;
+    padding: 40px 0;
+  }
+
+  .no-results.show { display: block; }
+
+  footer {
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    opacity: 0.55;
+    padding: 0 24px 48px;
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <p class="eyebrow">Mantra4Change · Shikshagraha</p>
+  <h1>Comms Resource Center</h1>
+  <p class="tagline">Every book, journal, and report the team has published — in one shared shelf.</p>
+  <div class="search-slip">
+    <label for="search" class="search-label">Search the shelf</label>
+    <input type="text" id="search" placeholder="Try “report”, “journal”, or a title…" autocomplete="off">
+  </div>
+</header>
+
+<main>
+
+  <section class="shelf shelf--internal-mantra" data-set="internal-mantra">
+    <div class="shelf-header">
+      <h2>Internal use <span class="org">(Mantra)</span></h2>
+      <span class="count"></span>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <span class="stamp">Journal</span>
+        <h3 class="card-title">Mantra Induction Journal</h3>
+        <a class="card-link" href="https://canva.link/2rbtb5r1qj4glms" target="_blank" rel="noopener">Open resource ↗</a>
+      </article>
+      <article class="card">
+        <span class="stamp">Handbook</span>
+        <h3 class="card-title">Mantra Employee Handbook</h3>
+        <a class="card-link" href="https://canva.link/iersl415fq3hls0" target="_blank" rel="noopener">Open resource ↗</a>
+      </article>
+      <!-- To add a new resource here: copy one <article class="card">...</article> block above, and edit the stamp text, title, and link. -->
+    </div>
+  </section>
+
+  <section class="shelf shelf--external-mantra" data-set="external-mantra">
+    <div class="shelf-header">
+      <h2>External use <span class="org">(Mantra)</span></h2>
+      <span class="count"></span>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <span class="stamp">Coffee table book</span>
+        <h3 class="card-title">PBL Mela Photobook (2026)</h3>
+        <a class="card-link" href="https://www.canva.com/design/DAG-djEQ2hA/AbTVf-65pu0g6FBE7QOg6g/edit" target="_blank" rel="noopener">Open resource ↗</a>
+      </article>
+      <article class="card">
+        <span class="stamp">Journal</span>
+        <h3 class="card-title">PBL Mela Bihar journal (2026)</h3>
+        <a class="card-link" href="https://canva.link/iciqb0rdnv1ided" target="_blank" rel="noopener">Open resource ↗</a>
+      </article>
+      <article class="card">
+        <span class="stamp">Annual Report</span>
+        <h3 class="card-title">Every Step Towards Education (2026)</h3>
+        <a class="card-link" href="https://canva.link/dtfmc1yuh4gwdg3" target="_blank" rel="noopener">Open resource ↗</a>
+      </article>
+      <article class="card">
+        <span class="stamp">Impact Story Book</span>
+        <h3 class="card-title">Learning Beyond Chalk &amp; Talk (Bihar)</h3>
+        <a class="card-link" href="https://canva.link/w2s6wlsq70qvwa6" target="_blank" rel="noopener">Open resource ↗</a>
+      </article>
+      <article class="card">
+        <span class="stamp">Impact Story Book</span>
+        <h3 class="card-title">Small steps, big impact (Districts, Bihar)</h3>
+        <a class="card-link" href="https://canva.link/knokssvnnmpur7b" target="_blank" rel="noopener">Open resource ↗</a>
+      </article>
+      <article class="card">
+        <span class="stamp">Impact Story Book</span>
+        <h3 class="card-title">PBL Photobook (Bihar)</h3>
+        <a class="card-link" href="https://canva.link/j3gllvnqt2g5xkd" target="_blank" rel="noopener">Open resource ↗</a>
+      </article>
+      <article class="card">
+        <span class="stamp">Report</span>
+        <h3 class="card-title">PBL baseline report (Bihar)</h3>
+        <a class="card-link" href="https://canva.link/6ldyj4pd7fxlole" target="_blank" rel="noopener">Open resource ↗</a>
+      </article>
+      <!-- To add a new resource here: copy one <article class="card">...</article> block above, and edit the stamp text, title, and link. -->
+    </div>
+  </section>
+
+  <section class="shelf shelf--external-shikshagraha" data-set="external-shikshagraha">
+    <div class="shelf-header">
+      <h2>External use <span class="org">(Shikshagraha)</span></h2>
+      <span class="count"></span>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <span class="stamp">Coffee table book</span>
+        <h3 class="card-title">Small steps to build great schools</h3>
+        <a class="card-link" href="https://canva.link/8xckyivq3dxg4xr" target="_blank" rel="noopener">Open resource ↗</a>
+      </article>
+      <article class="card">
+        <span class="stamp">Journal</span>
+        <h3 class="card-title">Schwaab My Learning Journey</h3>
+        <a class="card-link" href="https://canva.link/yht339fylrpwq3m" target="_blank" rel="noopener">Open resource ↗</a>
+      </article>
+      <!-- To add a new resource here: copy one <article class="card">...</article> block above, and edit the stamp text, title, and link. -->
+    </div>
+  </section>
+
+  <section class="shelf shelf--other" data-set="other">
+    <div class="shelf-header">
+      <h2>Other</h2>
+      <span class="count"></span>
+    </div>
+    <div class="cards">
+      <article class="card">
+        <span class="stamp">Report</span>
+        <h3 class="card-title">Edumentum mid-year report</h3>
+        <a class="card-link" href="https://canva.link/5eyjw6lloauz8bs" target="_blank" rel="noopener">Open resource ↗</a>
+      </article>
+      <article class="card">
+        <span class="stamp">Report</span>
+        <h3 class="card-title">Edumentum Annual Report</h3>
+        <a class="card-link" href="https://canva.link/40jlfqkh2y72fgf" target="_blank" rel="noopener">Open resource ↗</a>
+      </article>
+      <!-- To add a new resource here: copy one <article class="card">...</article> block above, and edit the stamp text, title, and link. -->
+    </div>
+  </section>
+
+  <p class="no-results" id="noResults">No resources match that search.</p>
+
+</main>
+
+<footer>
+  Maintained by the Comms team · Last updated <span id="date"></span>
+</footer>
+
+<script>
+  document.getElementById('date').textContent = new Date().toLocaleDateString('en-US', {
+    year: 'numeric', month: 'long', day: 'numeric'
+  });
+
+  document.querySelectorAll('.shelf').forEach(shelf => {
+    const count = shelf.querySelectorAll('.card').length;
+    shelf.querySelector('.count').textContent = count + (count === 1 ? ' resource' : ' resources');
+  });
+
+  const searchInput = document.getElementById('search');
+  const shelves = document.querySelectorAll('.shelf');
+  const noResults = document.getElementById('noResults');
+
+  searchInput.addEventListener('input', () => {
+    const query = searchInput.value.trim().toLowerCase();
+    let totalVisible = 0;
+
+    shelves.forEach(shelf => {
+      let visibleInShelf = 0;
+      shelf.querySelectorAll('.card').forEach(card => {
+        const match = card.textContent.toLowerCase().includes(query);
+        card.classList.toggle('hidden', !match);
+        if (match) visibleInShelf++;
+      });
+      shelf.classList.toggle('hidden', visibleInShelf === 0);
+      totalVisible += visibleInShelf;
+    });
+
+    noResults.classList.toggle('show', totalVisible === 0);
+  });
+</script>
+
+</body>
+</html>
