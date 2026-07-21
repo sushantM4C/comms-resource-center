@@ -131,8 +131,8 @@
 
   /* ---------- Hero ---------- */
   .hero {
-    background: var(--navy);
-    color: #fff;
+    background: linear-gradient(180deg, #ffffff 0%, var(--paleblue) 100%);
+    color: var(--ink);
     text-align: center;
     padding: 64px 24px 0;
     position: relative;
@@ -146,7 +146,7 @@
   }
 
   .hero h1 {
-    color: #fff;
+    color: var(--navy);
     font-size: clamp(32px, 5vw, 50px);
     font-weight: 800;
     margin-bottom: 10px;
@@ -155,7 +155,7 @@
   .hero .tagline {
     font-size: 18px;
     font-weight: 700;
-    color: var(--paleblue);
+    color: var(--navy);
     letter-spacing: 0.02em;
     margin-bottom: 14px;
   }
@@ -163,7 +163,7 @@
   .hero p.desc {
     max-width: 620px;
     margin: 0 auto;
-    color: rgba(255,255,255,0.85);
+    color: #4b5573;
     font-size: 15.5px;
   }
 
@@ -172,7 +172,7 @@
     margin: 22px 0 0;
     font-weight: 700;
     font-style: italic;
-    color: var(--yellow);
+    color: var(--orange);
     font-size: 14px;
   }
 
@@ -338,6 +338,9 @@
 
   .org-profile { display: none; }
   .org-profile.active { display: block; }
+
+  .year-panel { display: none; }
+  .year-panel.active { display: block; }
 
   .org-row {
     display: grid;
@@ -635,6 +638,35 @@
 
   .future-callout .eyebrow { color: var(--dullblue); }
 
+  .stmt-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+
+  .stmt-card .stmt-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .stmt-card p.copyable {
+    margin: 0;
+    font-size: 15px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .stmt-card p.stmt-source {
+    margin: 10px 0 0;
+    font-size: 12px;
+    color: #7b849c;
+    font-style: italic;
+  }
+
   .board-group { margin-bottom: 44px; }
 
   .board-group h3 {
@@ -753,6 +785,7 @@
     <a href="#collaterals">Collaterals</a>
     <a href="#board">Board</a>
     <a href="#decks">Decks &amp; Presentations</a>
+    <a href="#social">Social Media</a>
   </nav>
 </div>
 
@@ -1108,6 +1141,121 @@
         <div><span class="num" style="color:var(--navy);">520,200</span><span class="lbl" style="color:#7b849c;">Public schools</span></div>
         <div><span class="num" style="color:var(--navy);">54,000,000</span><span class="lbl" style="color:#7b849c;">Children (Grades 1&ndash;8)</span></div>
       </div>
+    </div>
+
+    <p class="eyebrow" style="margin-top:44px;">Ready-to-use impact statements</p>
+    <h2 class="section-title" style="font-size:24px;">Quotable numbers, with sources</h2>
+    <p class="section-sub">Pulled from the Annual Report data. Each one is ready to paste into a deck, post, or pitch &mdash; tap "Copy" to grab just the statement.</p>
+
+    <div class="org-tabs">
+      <button class="org-tab-btn active" onclick="showYear('2025-26', this)">2025&ndash;26</button>
+      <button class="org-tab-btn" onclick="showYear('2024-25', this)">2024&ndash;25</button>
+    </div>
+
+    <div class="year-panel active" data-year="2025-26">
+      <div class="stmt-card">
+        <div class="stmt-row">
+          <p class="copyable">Mantra4Change's Project-Based Learning program now reaches over 227,500 students across approximately 1,700 schools in Gaya and Lakhisarai, Bihar.</p>
+          <button class="mini-copy" onclick="copyMini(this)">Copy</button>
+        </div>
+        <p class="stmt-source">Source: Bihar 2025-26 Baseline-Endline Evaluation, 4th Wheel &amp; Things Education</p>
+      </div>
+      <div class="stmt-card">
+        <div class="stmt-row">
+          <p class="copyable">In Gaya, the share of students in the lowest performance category (&le;20% mastery) dropped from 42% to 20% &mdash; a 22-point reduction &mdash; with 100% of surveyed teachers willing to continue PBL.</p>
+          <button class="mini-copy" onclick="copyMini(this)">Copy</button>
+        </div>
+        <p class="stmt-source">Source: Gaya District Endline Evaluation, 4th Wheel &amp; Things Education (2025-26)</p>
+      </div>
+      <div class="stmt-card">
+        <div class="stmt-row">
+          <p class="copyable">In Lakhisarai, Grade 7 Mathematics scores jumped from 32.3% to 48.2% &mdash; a 16-point gain, the strongest improvement across any subject or grade.</p>
+          <button class="mini-copy" onclick="copyMini(this)">Copy</button>
+        </div>
+        <p class="stmt-source">Source: Lakhisarai District Endline Evaluation, 4th Wheel &amp; Things Education (2025-26)</p>
+      </div>
+      <div class="stmt-card">
+        <div class="stmt-row">
+          <p class="copyable">Perceived usefulness of Micro-Improvement Projects (MIPs) in Lakhisarai rose from 48% to 74%, with 72% of teachers reporting high satisfaction with implementation.</p>
+          <button class="mini-copy" onclick="copyMini(this)">Copy</button>
+        </div>
+        <p class="stmt-source">Source: Lakhisarai District Endline Evaluation, 4th Wheel &amp; Things Education (2025-26)</p>
+      </div>
+      <div class="stmt-card">
+        <div class="stmt-row">
+          <p class="copyable">Teacher-perceived 21st-century skills gains reached 89% (communication) and 94% (critical thinking) in Gaya, and 97% for both in Lakhisarai, by endline.</p>
+          <button class="mini-copy" onclick="copyMini(this)">Copy</button>
+        </div>
+        <p class="stmt-source">Source: Bihar 2025-26 Baseline-Endline Evaluation, 4th Wheel &amp; Things Education</p>
+      </div>
+      <div class="stmt-card">
+        <div class="stmt-row">
+          <p class="copyable">An estimated ~42,800 schools in Karnataka effectively implemented at least one systemic improvement, led by 1,620 leaders driving system-level change.</p>
+          <button class="mini-copy" onclick="copyMini(this)">Copy</button>
+        </div>
+        <p class="stmt-source">Source: Org monitoring data, 2025-26 (extrapolated from sampled schools; see Annual Report for methodology)</p>
+      </div>
+      <div class="stmt-card">
+        <div class="stmt-row">
+          <p class="copyable">17,649 schools in Bihar effectively implemented at least one systemic improvement, guided by 37 leaders.</p>
+          <button class="mini-copy" onclick="copyMini(this)">Copy</button>
+        </div>
+        <p class="stmt-source">Source: Org monitoring data, 2025-26</p>
+      </div>
+      <!-- To add a new statement: copy one <div class="stmt-card">...</div> block above and edit it. -->
+    </div>
+
+    <div class="year-panel" data-year="2024-25">
+      <div class="stmt-card">
+        <div class="stmt-row">
+          <p class="copyable">Students in Andhra Pradesh made up to two years' worth of progress in just one year &mdash; in Grade 6 English, Grade 6 Math, and Grade 7 Science.</p>
+          <button class="mini-copy" onclick="copyMini(this)">Copy</button>
+        </div>
+        <p class="stmt-source">Source: CGI Report, 2024-25 (grade- and subject-wise competency data)</p>
+      </div>
+      <div class="stmt-card">
+        <div class="stmt-row">
+          <p class="copyable">Across Bihar, students made up to two years' worth of learning in just one year &mdash; especially in Grades 7 and 8 &mdash; showing real, accelerated progress in the classroom.</p>
+          <button class="mini-copy" onclick="copyMini(this)">Copy</button>
+        </div>
+        <p class="stmt-source">Source: CGI Report, 2024-25</p>
+      </div>
+      <div class="stmt-card">
+        <div class="stmt-row">
+          <p class="copyable">16,233 schools were implementing Project-Based Learning across 38 districts in Bihar.</p>
+          <button class="mini-copy" onclick="copyMini(this)">Copy</button>
+        </div>
+        <p class="stmt-source">Source: DIKSHA dashboard monitoring data, 2024-25</p>
+      </div>
+      <div class="stmt-card">
+        <div class="stmt-row">
+          <p class="copyable">In Bihar, teachers actively implementing PBL rose from 50% to 95%, with 90% having attended offline PBL training (up from 44%).</p>
+          <button class="mini-copy" onclick="copyMini(this)">Copy</button>
+        </div>
+        <p class="stmt-source">Source: Process evaluation teacher survey, 2024-25</p>
+      </div>
+      <div class="stmt-card">
+        <div class="stmt-row">
+          <p class="copyable">A 12.48 percentage-point increase in foundational literacy and numeracy skills was recorded in Karnataka's Bangalore district.</p>
+          <button class="mini-copy" onclick="copyMini(this)">Copy</button>
+        </div>
+        <p class="stmt-source">Source: Karnataka FLN Endline Report, 2024-25</p>
+      </div>
+      <div class="stmt-card">
+        <div class="stmt-row">
+          <p class="copyable">Over 1,000 students in Punjab have cleared national-level competitive exams in Engineering and Medicine, securing admission to recognised institutes.</p>
+          <button class="mini-copy" onclick="copyMini(this)">Copy</button>
+        </div>
+        <p class="stmt-source">Source: Punjab program data, 2024-25</p>
+      </div>
+      <div class="stmt-card">
+        <div class="stmt-row">
+          <p class="copyable">69.62% of schools in Uttar Pradesh are NIPUN &mdash; rising to 74.28% in the Super 150 Blocks.</p>
+          <button class="mini-copy" onclick="copyMini(this)">Copy</button>
+        </div>
+        <p class="stmt-source">Source: Uttar Pradesh state data, 2024-25</p>
+      </div>
+      <!-- To add a new statement: copy one <div class="stmt-card">...</div> block above and edit it. -->
     </div>
   </div>
 </section>
@@ -1651,6 +1799,42 @@ He holds a Master's in Finance from London Business School, an MBA from the Indi
   </div>
 </section>
 
+<!-- ============ SOCIAL MEDIA ============ -->
+<section class="panel tinted" id="social">
+  <div class="panel-inner">
+    <p class="eyebrow">Stay Connected</p>
+    <h2 class="section-title">Follow us on social media</h2>
+    <p class="section-sub">Ready to drop into email signatures, collateral, or bios &mdash; wherever the team needs a quick link.</p>
+    <div class="cards">
+      <article class="card">
+        <span class="tag">Instagram</span>
+        <h4 class="card-title">@mantra4change</h4>
+        <a class="card-link" href="https://www.instagram.com/mantra4change/" target="_blank" rel="noopener">Follow &#8599;</a>
+      </article>
+      <article class="card">
+        <span class="tag">LinkedIn</span>
+        <h4 class="card-title">Mantra4Change</h4>
+        <a class="card-link" href="https://www.linkedin.com/company/mantra4change" target="_blank" rel="noopener">Follow &#8599;</a>
+      </article>
+      <article class="card">
+        <span class="tag">Twitter / X</span>
+        <h4 class="card-title">@mantra4change</h4>
+        <a class="card-link" href="https://twitter.com/mantra4change" target="_blank" rel="noopener">Follow &#8599;</a>
+      </article>
+      <article class="card">
+        <span class="tag">Facebook</span>
+        <h4 class="card-title">Mantra4Change</h4>
+        <a class="card-link" href="https://www.facebook.com/mantra4change" target="_blank" rel="noopener">Follow &#8599;</a>
+      </article>
+      <article class="card">
+        <span class="tag">YouTube</span>
+        <h4 class="card-title">@Mantra4Change</h4>
+        <a class="card-link" href="https://www.youtube.com/@Mantra4Change/videos" target="_blank" rel="noopener">Watch &#8599;</a>
+      </article>
+    </div>
+  </div>
+</section>
+
 <footer>
   Maintained by the Comms team · Last updated <span id="date"></span><br>
   <span class="hashtag">#OneStepAtATime</span>
@@ -1671,6 +1855,12 @@ He holds a Master's in Finance from London Business School, an MBA from the Indi
   }
 
   // Copy buttons
+  function showYear(year, btn) {
+    document.querySelectorAll('.year-panel').forEach(el => el.classList.toggle('active', el.dataset.year === year));
+    btn.parentElement.querySelectorAll('.org-tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
   function showBoard(board, btn) {
     document.querySelectorAll('.board-panel').forEach(el => el.classList.toggle('active', el.dataset.board === board));
     btn.parentElement.querySelectorAll('.org-tab-btn').forEach(b => b.classList.remove('active'));
